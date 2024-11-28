@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, 
+    initial-scale=1">
+    <meta name="description" content="">
+    <title>HOME</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    
+</head>
+<body>
+    <!-- makan, tidur, obat? -->
+    <div id="bungkus">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="d-flex justify-content-center">
+                    <img src="paw/paw.png" width="100px">
+                </div>
+            </div>
+            <div id="garis">
+                <p><b>~UMN GOTCHA~</b></p>
+            </div>
+        </div>
+            
+        <!-- PROFIL -->
+        
+        <div id="profil">
+            <div class="avatar">
+                <i class="fa fa-caret-left fa-5x  c-pointer" onclick="gantiPenguinLeft()"></i>
+                <img width="300px" id="pilihpenguin" src="image/penguin1/penguin.png" alt="penguin" class="penguin">
+                <i class="fa fa-caret-right fa-5x c-pointer" onclick="gantiPenguinRight()"></i>
+            </div>
+            
+            <center>
+                <p class="space mt-10 mb-10"></p>
+                <input type="text" id="nama" class="text-center form-control w-auto m-auto mt-15" placeholder=" Pet Name ">
+                
+                <button class=" btns third mt-4 btn btn-secondary" onclick="start()">Play</button>
+            
+                <div>
+                    <button class="btns third mt-4 btn btn-secondary" onclick="randomizePenguin()"><i class="logo fa-solid fa-dice" style="color: #d42f2f;"></i> Random</button>
+                </div>
+            </center>
+        </div>
+        
+        <!-- PERMAINAN -->
+        <div id="gameplay" class="d-none">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 m-auto">
+                    <div id="kotak" class="card p-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center">
+                                    <i class="logo fa-sharp fa-solid fa-utensils" style="color: #d1de21;"></i>
+                                    <div class="progress w-100">
+                                        <div class="progress-bar bg-danger" role="progressbar" id="hungerBar"></div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center">
+                                    <i class="logo fa-solid fa-bed-pulse" style="color: #a63f71;"></i>
+                                    <div class="progress w-100">
+                                        <div class="progress-bar bg-danger" role="progressbar" id="sleepyBar"></div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-6 col-lg-6 mt-2 d-flex align-items-center">
+                                    <i class="logo fa-solid fa-dice" style="color: #bcaeae;"></i>
+                                    <div class="progress w-100">
+                                        <div class="progress-bar bg-danger" role="progressbar" id="funBar"></div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-6 col-lg-6 mt-2 d-flex align-items-center">
+                                    <i class="fa-solid fa-hospital" style="color: #48bd28;"></i>
+                                    <div class="progress w-100">
+                                        <div class="progress-bar bg-danger" role="progressbar" id="healthBar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <p class="s20 mb-0 mt-2">Lv. <span id="level"></span></p>
+                                    <p class="s15 mb-0 pb-0">Friend: <span id="friend"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="time" class="s15 putih"></div>
+                    <div id="sentence" class="s20 putih"></div>
+                    <div id="temporaryStatus" class="s15 putih"></div>
+                    <div id="temporaryStatus2" class="s15 putih"></div>
+                    <div id="temporaryStatusHunger" class="s15 putih"></div>
+                    <div id="temporaryStatusSleepy" class="s15 putih"></div>
+                    <div id="temporaryStatusFun" class="s15 putih"></div>
+                    <div id="temporaryStatusHealth" class="s15 putih"></div>
+                    <div id="statusBelanja" class="s15 putih"></div>
+
+                    <img width="300px" id="penguinAvatar" alt="avatar" class="avatarAktivitas mt-3">
+                    <canvas width ="400px" height ="400px" id ="gameSnake" style="background-color: rgb(152, 231, 251);" class="d-none"></canvas>
+                
+                    <div class="mt-3" id="tombolAktivitas">
+                        <button class="klik btn btn-secondary" onclick="activityProcess('eat')"><i class="fa-sharp fa-solid fa-utensils" style="color: #d1de21;"></i>Makan</button>
+                        <button class="klik btn btn-secondary" onclick="activityProcess('sleep')"><i class="fa-solid fa-bed-pulse" style="color: #a63f71;"></i>Tidur</button>
+                        <button class="klik btn btn-secondary" onclick="activityProcess('play')"><i class="fa-solid fa-dice" style="color: #bcaeae;"></i>Main</button>
+                        <button class="klik btn btn-secondary" onclick="activityProcess('drinking medicine')"><i class="fa-solid fa-hospital" style="color: #48bd28;"></i>Obat</button>
+                        <button class="klik btn btn-secondary" onclick="enterShop();"><i class="fa fa-book s20 icon"></i>Belanja</button>
+                    </div>
+                    <div class="mt-3" id="tombolBelanja">
+                        <button class="klik btn btn-secondary" onclick="leaveShop()">Back</button>
+                    </div>
+                    <div class="mt-3" id="belanja1">
+                        <button class="klik2 btn btn-secondary" onclick="buyItem('canned fish')">3 Friends | Canned Fish</button>
+                        <button class="klik2 btn btn-secondary" onclick="buyItem('stimulants')">4 Friends | Stimulants</button>
+                        <button class="klik2 btn btn-secondary" onclick="buyItem('small vitamin')">5 Friends | Small Vitamin</button>
+                    </div>
+                    <center>
+                        <div id="keteranganAktivitas" class="klik3 mt-3"></div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div id="gameOver" class="d-none">
+            <img width="300px" src="paw/gameover.gif">
+            <h1>GAME OVER!!!<br>
+                JIAHH KALAH, MAKANYA DIRAWAT PENGUINNYA BOS!!
+            </h1>
+        </div>
+    </div>
+    <script>
+        let gameStart = false;
+        let cooldownShop = false;
+        let nama = '';
+        let penguin = 'penguin1';
+        let activity = '';
+        let n = 1;
+        let counterTime = 0;
+        let hunger = 50;
+        let sleepy = 50;
+        let fun = 50;
+        let health = 50;
+        let friendCount = 0;
+        let levelCount = 1;
+        let noActivityTimer = setInterval(noActivity, 10000);
+
+        let startGameSnake = false;
+        let canvas = document.getElementById("gameSnake");
+        let ctx = canvas.getContext("2d");
+        let countFrame = 0;
+        let maxFrame = 10;
+        let gameTimeMax = 10;
+        let gameTimeCount = 0;
+        let grid = 16;
+        let snake = {
+            x: 160,
+            y: 160,
+            dx: grid,
+            dy: 0,
+            cells: [],
+            maxCells: 4
+        }
+        let apple = {
+            x: 320,
+            y: 320
+        }
+        
+        function gantiPenguinRight(){
+            n = (n % 4) + 1;
+            penguin = `penguin${n}`;
+            $('#pilihpenguin').attr('src', `image/${penguin}/penguin.png`);
+        }
+
+        function gantiPenguinLeft(){
+            n--;
+            if(n == 0) n = 4;
+            penguin = `penguin${n}`;
+            $('#pilihpenguin').attr('src', `image/${penguin}/penguin.png`);
+        }
+
+        function randomizePenguin(){
+            n = Math.floor(Math.random()*4)+1;
+            penguin = `penguin${n}`;
+            $('#pilihpenguin').attr('src', `image/${penguin}/penguin.png`);
+        }
+
+        $('#nama').on('keyup', function(){
+            nama = this.value;
+        });
+        
+        function start(){
+            if(nama.length == 0) alert('Harus ada nama untuk penguin!');
+            else if(nama.length < 3) alert('Nama penguin minimum 3 karakter!');
+            else{
+                $('#profil').addClass('d-none');
+                $('#gameOver').addClass('d-none');
+                $('#garis').addClass('d-none');
+                $('#tombolBelanja').addClass('d-none');
+                $('#belanja1').addClass('d-none');
+                $('#gameplay').removeClass('d-none');
+                $('#temporarySentence3').addClass('d-none');
+                gameStart = true;
+
+                getTime();
+                checkStatus();
+                clearInterval(noActivityTimer);
+                noActivityTimer = setInterval(noActivity, 10000);
+            }
+            
+        }
+
+        function getTime(){
+            let hour = new Date().getHours();
+            let minute = new Date().getMinutes();
+
+            setInterval(function(){
+                //update: waktu
+                minute++;
+                counterTime++;
+                if(startGameSnake) gameTimeCount++;
+                if(minute % 60 == 0){
+                    hour++;
+                    minute = 0;
+                }
+                if(hour % 24 == 0) hour = 0;
+                
+                //update: background & salam
+                if(hour >= 0 && hour <= 10){
+                    if(startGameSnake) document.getElementById('sentence').innerHTML = `Playing`;
+                    else document.getElementById('sentence').innerHTML = `Morning, ${nama}`;
+                    document.body.style.backgroundImage = `url('paw/pagi.jpg')`;
+                }
+                else if(hour >= 11 && hour <= 15){
+                    if(startGameSnake) document.getElementById('sentence').innerHTML = `Playing`;
+                    else document.getElementById('sentence').innerHTML = `Afternoon, ${nama}`;
+                    document.body.style.backgroundImage = `url('paw/siang.jpg')`;
+                }
+                else if(hour >= 16 && hour <= 19){
+                    if(startGameSnake) document.getElementById('sentence').innerHTML = `Playing`;
+                    else document.getElementById('sentence').innerHTML = `Evening, ${nama}`;
+                    document.body.style.backgroundImage = `url('paw/sore.jpg')`;
+                }
+                else if(hour >= 20 && hour <= 23){
+                    if(startGameSnake) document.getElementById('sentence').innerHTML = `Playing`;
+                    else document.getElementById('sentence').innerHTML = `Good Night, ${nama}`;
+                    document.body.style.backgroundImage = `url('paw/malam.jpg')`;
+                }
+                checkLevel();
+                if(gameTimeCount === gameTimeMax){
+                    startGameSnake = false;
+                    gameTimeCount = 0;
+                    startGameSnake = false;
+                    snake.x = 160;
+                    snake.y = 160;
+                    snake.cells = [];
+                    snake.maxCells = 4;
+                    snake.dx = grid;
+                    snake.dy = 0;
+                    apple.x = getRandomInt(0, 25) * grid;
+                    apple.y = getRandomInt(0, 25) * grid;
+                    $('#temporaryStatus2').html('Game: Times Up!');
+                    noActivityTimer = setInterval(noActivity, 10000);
+                    setInterval(function(){
+                        $('#temporaryStatus2').html(``);
+                    }, 3000);
+                }else if(fun >= 100){
+                    startGameSnake = false;
+                    gameTimeCount = 0;
+                    startGameSnake = false;
+                    snake.x = 160;
+                    snake.y = 160;
+                    snake.cells = [];
+                    snake.maxCells = 4;
+                    snake.dx = grid;
+                    snake.dy = 0;
+                    apple.x = getRandomInt(0, 25) * grid;
+                    apple.y = getRandomInt(0, 25) * grid;
+                    $('#temporaryStatus2').html(`Game: ${nama} had enough fun for now!`);
+                    noActivityTimer = setInterval(noActivity, 10000);
+                    setInterval(function(){
+                        $('#temporaryStatus2').html(``);
+                    }, 3000);
+                }
+                document.getElementById('time').innerHTML = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function checkLevel(){
+            if(counterTime >= 25 && startGameSnake == false && levelCount == 1){
+                levelCount++;
+                gameTimeMax = 15;
+                maxFrame = 9;
+            }
+            else if(counterTime >= 85 && startGameSnake == false && levelCount == 2){
+                levelCount++;
+                gameTimeMax = 20;
+                maxFrame = 7;
+            }else if(levelCount == 3);
+            $('#level').html(levelCount);
+        }
+
+        function checkStatus(){
+            if(hunger <= 0 || fun <= 0 || sleepy <= 0 || health <= 0){
+                $('#gameOver').removeClass('d-none');
+                $('#gameplay').addClass('d-none');
+                //reload in 5 sec
+                setTimeout(function(){
+                    window.location.reload();
+                }, 5000);
+            }else{
+                if(hunger <= 20) $('#temporaryStatusHunger').html(`${nama} is hungry!`);
+                else $('#temporaryStatusHunger').html(''); 
+                if(sleepy <= 20) $('#temporaryStatusSleepy').html(`${nama} is sleepy!`);
+                else $('#temporaryStatusSleepy').html('');
+                if(fun <= 20) $('#temporaryStatusFun').html(`${nama} is starting to get bored!`);
+                else $('#temporaryStatusFun').html('');
+                if(health <= 20) $('#temporaryStatusHealth').html(`${nama} is starting to get sick!`);
+                else $('#temporaryStatusHealth').html(''); 
+
+                if(hunger >= 100) hunger = 100;
+                if(sleepy >= 100) sleepy = 100;
+                if(fun >= 100) fun = 100;
+                if(health >= 100) health = 100;
+
+                $('#hungerBar').css('width', `${hunger}%`);
+                $('#sleepyBar').css('width', `${sleepy}%`);
+                $('#funBar').css('width', `${fun}%`);
+                $('#healthBar').css('width', `${health}%`);
+                $('#friend').html(friendCount);
+                $('#penguinAvatar').attr('src', `image/${penguin}/${activity}penguin.png`);
+            }
+        }
+
+        function enterShop(){
+            $('#tombolAktivitas').addClass('d-none');
+            $('#tombolBelanja').removeClass('d-none');
+            if(!cooldownShop) $('#belanja1').removeClass('d-none');
+            else $('#statusBelanja').html('Belanja masih cooldown!');
+        }
+
+        function leaveShop(){
+            $('#tombolAktivitas').removeClass('d-none');
+            $('#tombolBelanja').addClass('d-none');
+            $('#belanja1').addClass('d-none');
+            $('#statusBelanja').html('');
+        }
+
+        function buyItem(itemType){
+            switch(itemType){
+                case "canned fish":
+                    if(friendCount < 3) printNotEnoughFriends();
+                    else{
+                        friendCount -= 3;
+                        hunger += 25;
+                        cooldownShop = true;
+                    }
+                    break;
+                case "stimulants":
+                    if(friendCount < 4) printNotEnoughFriends();
+                    else{
+                        friendCount -= 4;
+                        sleepy += 40;
+                        hunger -= 5;
+                        health -= 3;
+                        cooldownShop = tru4e;
+                    }
+                    break;
+                case "small vitamin":
+                    if(friendCount < 5) printNotEnoughFriends();
+                    else{
+                        friendCount -= 5;
+                        health += 20;
+                        cooldownShop = true;
+                    }
+                    break;
+            }
+            setTimeout(function(){
+                    $('#temporaryStatus').html('');
+            }, 3000);
+            if(cooldownShop){
+                setTimeout(function(){
+                    cooldownShop = false;
+                }, 6000);
+            }
+            leaveShop();
+            checkStatus();
+        }
+
+        function printNotEnoughFriends(){
+            $('#temporaryStatus2').html(`${nama} has not enough friends to buy this item!`);
+
+        }
+
+        function noActivity(){
+            if(gameStart == true){
+                hunger -= Math.floor(Math.random()*4)+3;
+                sleepy -= Math.floor(Math.random()*4)+3;
+                fun -= Math.floor(Math.random()*4)+6;
+                health -= Math.floor(Math.random()*4)+3;
+                checkStatus();
+            }
+        }
+
+        function activityProcess(activityType){
+            if(activityType === "eat"){
+                if(hunger >= 100) $('#temporaryStatus2').html(`${nama} is full!`);
+                else{
+                    activity = "eat";
+                    hunger += Math.floor(Math.random()*2)+7;
+                    sleepy -= 2;
+                    fun -= 1;
+                }
+            }else if(activityType === "sleep"){
+                if(sleepy >= 100) $('#temporaryStatus2').html(`${nama} is full of energy!`);
+                else{
+                    sleepy += Math.floor(Math.random()*3)+8;
+                    hunger -= 3;
+                }
+            }else if(activityType === "play"){
+                if(fun >= 100) $('#temporaryStatus2').html(`${nama} is still energetic!`);
+            }else if(activityType === "drinking medicine"){
+                if(health >= 100) $('#temporaryStatus2').html(`${nama} is still feeling healthy!`);
+                else{
+                    health += 8;
+                    sleepy -= 6;
+                }
+            }
+            setTimeout(function(){
+                $('#temporaryStatus2').html('');
+            }, 3000);
+            if(hunger >= 100 || sleepy >= 100 || fun >= 100 || health >= 100) return;
+            else if(activityType === "eat" || activityType === "sleep" || activityType === "drinking medicine"){
+                $('#tombolAktivitas').addClass('d-none');
+                
+                if(activityType === "eat" || activityType === "sleep"){
+                    $('#keteranganAktivitas').html(`${nama} is now ${activityType}ing`);
+                    activity = activityType;
+                }
+                else{
+                    $('#keteranganAktivitas').html(`${nama} is now ${activityType}`);
+                    activity = "medicine";
+                }
+                checkStatus();
+                clearInterval(noActivityTimer);
+                setTimeout(function(){
+                    $('#tombolAktivitas').removeClass('d-none');
+                    $('#keteranganAktivitas').html('');
+                    activity = "";
+                    $('#penguinAvatar').attr('src', `image/${penguin}/${activity}penguin.png`);
+                    $('#penguinAvatar').css('width', '300px');
+                }, 3000);
+                noActivityTimer = setInterval(noActivity, 10000);
+            }
+            else{
+                clearInterval(noActivityTimer);
+                startGameSnake = true;
+                checkStatus();
+                snakeGameCode();
+            }
+        }
+    
+        function snakeGameCode(){
+            $('#gameSnake').removeClass('d-none');
+            $('#penguinAvatar').addClass('d-none');
+            $('#tombolAktivitas').addClass('d-none');
+            document.addEventListener('keydown', function(button){
+                if(button.which === 37 && snake.dx === 0){
+                    snake.dx = -grid;
+                    snake.dy = 0;
+                }else if(button.which === 38 && snake.dy === 0){
+                    snake.dx = 0;
+                    snake.dy = -grid;
+                }else if(button.which === 39 && snake.dx === 0){
+                    snake.dx = grid;
+                    snake.dy = 0;
+                }else if(button.which === 40 && snake.dy === 0){
+                    snake.dx = 0;
+                    snake.dy = grid;
+                }
+            })
+
+            function loopGameSnake(){
+                if(!startGameSnake){
+                    cancelAnimationFrame(gameAnimation);
+                    $('#gameSnake').addClass('d-none');
+                    $('#penguinAvatar').removeClass('d-none');
+                    $('#tombolAktivitas').removeClass('d-none');
+                    return;
+                }else gameAnimation = requestAnimationFrame(loopGameSnake);
+                if(++countFrame < maxFrame) return;
+                countFrame = 0;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                snake.x += snake.dx;
+                snake.y += snake.dy;
+                if(snake.x < 0) snake.x = canvas.width - grid;
+                else if(snake.x >= canvas.width) snake.x = 0;
+
+                if(snake.y < 0) snake.y = canvas.width - grid;
+                else if(snake.y >= canvas.height) snake.y = 0;
+
+                snake.cells.unshift({x: snake.x, y: snake.y});
+                if(snake.cells.length > snake.maxCells) snake.cells.pop();
+                ctx.fillStyle = 'red';
+                ctx.fillRect(apple.x, apple.y, grid-1, grid-1);
+
+                ctx.fillStyle = 'white';
+                snake.cells.forEach(function(cell, index){
+                    ctx.fillRect(cell.x, cell.y, grid-1, grid-1);
+                    if(cell.x === apple.x && cell.y === apple.y){
+                        friendCount += 1;
+                        fun += 3;
+                        checkStatus();
+                        snake.maxCells++;
+                        apple.x = getRandomInt(0, 25) * grid;
+                        apple.y = getRandomInt(0, 25) * grid;
+                    }
+                    for(var i = index+1; i<snake.cells.length; i++){
+                        if(cell.x === snake.cells[i].x && cell.y === snake.cells[i].y){
+                            startGameSnake = false;
+                            snake.x = 160;
+                            snake.y = 160;
+                            snake.cells = [];
+                            snake.maxCells = 4;
+                            snake.dx = grid;
+                            snake.dy = 0;
+                            apple.x = getRandomInt(0, 25) * grid;
+                            apple.y = getRandomInt(0, 25) * grid;
+                            $('#temporaryStatus2').html(`Game: ${nama} hits itself on its way!`);
+                            noActivityTimer = setInterval(noActivity, 10000);
+                            setInterval(function(){
+                                $('#temporaryStatus2').html(``);
+                            }, 3000);
+                            break;
+                        }
+                    }
+                });
+            }
+            if(startGameSnake) requestAnimationFrame(loopGameSnake);
+            else return;
+        }
+
+        function getRandomInt(min, max){
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+        
+    </script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <script src="game.js"></script>
+
+</body>
+</html>

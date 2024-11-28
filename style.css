@@ -1,0 +1,168 @@
+body{
+    background-image:url("paw/antartika.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed ;
+    background-position: center;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.putih{
+    color: white;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+#garis {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-bottom: 5px solid wheat;
+}
+
+#profil {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.penguin {
+    max-width: 100%;
+    height: auto;
+}
+
+.form-control {
+    width: auto;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.klik {
+    margin-top: 20px;
+    width: 120px;
+    border: none;
+    color: #000000;
+    background-color: white;
+}
+.klik:hover, .klik:focus {
+    color: #b6b5b0;
+    opacity: 90%;
+    outline: 0;
+}
+
+.klik2 {
+    margin-top: 20px;
+    width: 150px;
+    border: none;
+    color: #000000;
+    background-color: white;
+}
+.klik2:hover, .klik2:focus {
+    color: #b6b5b0;
+    opacity: 90%;
+    outline: 0;
+}
+.klik3{
+    margin-top: 20px;
+    width: auto;
+    border: none;
+    color: #000000;
+    background-color: white;
+}
+.klik3:hover, .klik3:focus {
+    color: #b6b5b0;
+    opacity: 90%;
+    outline: 0;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.fa-caret-left {
+    margin-right: 10px;
+}
+
+.fa-caret-right {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .icon-container {
+        flex-direction: row;
+    }
+
+    .fa-caret-left {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .fa-caret-right {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+.btns {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 0.6em;
+    color: #000000;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+.btns:hover, .btn:focus {
+    color: #fff;
+    outline: 0;
+}
+.third {
+    border-color: #19376D;
+    color: #fff;
+    box-shadow: 0 0 40px 40px #19376D inset, 0 0 0 0 #19376D;
+    transition: all 150ms ease-in-out;
+}
+.third:hover {
+    box-shadow: 0 0 10px 0 #19376D inset, 0 0 10px 4px #19376D;
+}
+
+#gameplay{
+    margin-top: 20px;
+}
+
+#gameOver{
+    margin-top: 200px;
+    color: white;
+}
